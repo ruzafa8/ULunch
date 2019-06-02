@@ -42,6 +42,8 @@ public class Plato_Test {
 		assertEquals(p2.getDieta(),Dieta.DEFAULT);
 		assertTrue(p3.getAlergias().isEmpty());
 		assertTrue(p1.getAlergias().contains(Alergias.MOSTAZA));
+		ArrayList<Alergias> alergias = new ArrayList<>(); alergias.add(Alergias.MOSTAZA); alergias.add(Alergias.GLUTEN);
+		assertEquals(p2.getAlergias(),alergias);
 		
 	}
 	@AfterEach
