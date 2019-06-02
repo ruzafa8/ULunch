@@ -14,7 +14,8 @@ public class Plato {
 		this.nombre = nombre;
 		this.imagen = imagen;
 		this.dieta  = dieta;
-		this.alergias = alergias;
+		this.alergias = new LinkedList<>();
+		this.alergias.addAll(alergias);
 		this.valoracion = new LinkedList<Valoracion>();
 	}
 	
@@ -49,5 +50,39 @@ public class Plato {
 	
 	public String getImagen() {
 		return imagen;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((alergias == null) ? 0 : alergias.hashCode());
+		result = prime * result + ((dieta == null) ? 0 : dieta.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Plato))
+			return false;
+		Plato other = (Plato) obj;
+		if (alergias == null) {
+			if (other.alergias != null)
+				return false;
+		} else if (!alergias.equals(other.alergias))
+			return false;
+		if (dieta != other.dieta)
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equalsIgnoreCase(other.nombre))
+			return false;
+		return true;
 	}
 }
