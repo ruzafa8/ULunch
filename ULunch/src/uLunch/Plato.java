@@ -10,7 +10,9 @@ public class Plato {
 	private List<Alergias> alergias;
 	private List<Valoracion> valoracion;
 	
-	public Plato(String nombre, String imagen, Dieta dieta, List<Alergias> alergias) {
+	public Plato(String nombre, String imagen, Dieta dieta, List<Alergias> alergias)throws IllegalArgumentException {
+		if(nombre == null)throw new IllegalArgumentException("Es necesario especificar el nombre");
+		if(dieta == null)throw new IllegalArgumentException("Es necesario especificar la dieta");
 		this.nombre = nombre;
 		this.imagen = imagen;
 		this.dieta  = dieta;
@@ -19,7 +21,7 @@ public class Plato {
 		this.valoracion = new LinkedList<Valoracion>();
 	}
 	
-	public void addValoracion(Usuario user, int puntuacion, String comentario){
+	public void addValoracion(Usuario user, int puntuacion, String comentario)throws IllegalArgumentException{
 		Valoracion val = new Valoracion(user, puntuacion, comentario);
 		valoracion.add(val);
 	}

@@ -1,4 +1,5 @@
 package uLunch;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Usuario {
@@ -10,11 +11,13 @@ public class Usuario {
 	private boolean admin;
 	private List<Alergias> alergias;
 	
-	public Usuario (String nombre,String password, String email, List<Alergias> alergias) {
+	public Usuario (String nombre,String password, String email, List<Alergias> alergias) throws IllegalArgumentException{
+		if(password.length()<6)throw new IllegalArgumentException("Contraseña demasiado debil");
 		this.nombre=nombre;
 		this.password=password;
 		this.email=email;
-		this.alergias = alergias;
+		this.alergias = new LinkedList<>();
+		this.alergias.addAll(alergias);
 		moderator = false;
 		admin = false;
 	}
@@ -55,7 +58,8 @@ public class Usuario {
 		this.admin = admin;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(String password)throws IllegalArgumentException {
+		if(password.length()<6)throw new IllegalArgumentException("Contraseña demasiado debil");
 		this.password = password;
 	}
 	
@@ -64,7 +68,33 @@ public class Usuario {
 	}
 	
 	public void setAlergias(List<Alergias> alergias) {
-		this.alergias = alergias;
+		this.alergias.clear();
+		this.alergias.addAll(alergias);
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Usuario))
+			return false;
+		Usuario other = (Usuario) obj;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		return true;
 	}
 	
 	

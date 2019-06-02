@@ -7,7 +7,9 @@ public class Menu {
 	private String dia;
 	private List<Plato> primerPlato, segundoPlato, postre;
 
-	public Menu(double precio, String dia) {
+	public Menu(double precio, String dia) throws IllegalArgumentException {
+		if(dia == null)throw new IllegalArgumentException("Es necesario especificar el dia");
+		if(precio<0)throw new IllegalArgumentException("El precio no puede ser negativo");
 		this.precio=precio;
 		this.dia=dia;
 		primerPlato=new ArrayList<Plato>();

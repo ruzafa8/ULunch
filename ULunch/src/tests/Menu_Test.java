@@ -80,6 +80,24 @@ public class Menu_Test {
             }).containsAll(p));
         assertFalse(p.containsAll(m.getPlatos()));
 	    }
+	
+	@Test
+	public void test2() {
+		try {
+			@SuppressWarnings("unused")
+			Menu m2 = new Menu(-4.25, "04/07/2019");
+		}catch(IllegalArgumentException e) {
+			assertEquals(e.getMessage(),"El precio no puede ser negativo");
+		}
+		
+		try {
+			@SuppressWarnings("unused")
+			Menu m2 = new Menu(4.25, null);
+		}catch(IllegalArgumentException e) {
+			assertEquals(e.getMessage(),"Es necesario especificar el dia");
+		}
+		
+	}
 		
 
 	@AfterEach

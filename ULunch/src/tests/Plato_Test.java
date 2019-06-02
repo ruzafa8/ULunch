@@ -30,7 +30,7 @@ public class Plato_Test {
 		alergenos.clear();
 		p3 = new Postre("Mostaza en salsa","TRES", Dieta.CELIACA, alergenos);
 		
-		p1.addValoracion(new Usuario("user","112233","user@user.user",new ArrayList<Alergias>()),10, null);
+		p1.addValoracion(new Usuario("user","112233","user@user.user",new ArrayList<Alergias>()),4, null);
 		p1.addValoracion(new Usuario("user","112233","user@user.user",new ArrayList<Alergias>()),1, null);
 		p1.addValoracion(new Usuario("user","112233","user@user.user",new ArrayList<Alergias>()),4, null);
 	}
@@ -38,7 +38,7 @@ public class Plato_Test {
 	public void test() {
 		assertEquals(p1,p1bis);
 		assertEquals(p2,p2bis);
-		assertEquals(p1.getPuntuacionMedia(),5);
+		assertEquals(p1.getPuntuacionMedia(),3);
 		assertEquals(p2.getDieta(),Dieta.DEFAULT);
 		assertTrue(p3.getAlergias().isEmpty());
 		assertTrue(p1.getAlergias().contains(Alergias.MOSTAZA));
@@ -46,6 +46,33 @@ public class Plato_Test {
 		assertEquals(p2.getAlergias(),alergias);
 		
 	}
+	
+	@Test
+	public void test2() {
+		try {
+			p1.addValoracion(new Usuario("user","112233","user@user.user",new ArrayList<Alergias>()),8, null);
+		}catch (IllegalArgumentException e) {
+			assertEquals(e.getMessage(),"La puntuacion debe ser un entero entre 0 y 5");
+		}
+		try {
+			p1.addValoracion(new Usuario("user","112233","user@user.user",new ArrayList<Alergias>()),-6, null);
+		}catch (IllegalArgumentException e) {
+			assertEquals(e.getMessage(),"La puntuacion debe ser un entero entre 0 y 5");
+		}
+		try {
+			@SuppressWarnings("unused")
+			Plato p5 = new Plato(null,"hola",Dieta.DEFAULT,null);
+		}catch (IllegalArgumentException e) {
+			assertEquals(e.getMessage(),"Es necesario especificar el nombre");
+		}
+		try {
+			@SuppressWarnings("unused")
+			Plato p5 = new Plato("esto","hola",null,null);
+		}catch (IllegalArgumentException e) {
+			assertEquals(e.getMessage(),"Es necesario especificar la dieta");
+		}
+	}
+	
 	@AfterEach
 	public void finish () {
 		p1 = null;
