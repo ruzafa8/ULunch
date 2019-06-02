@@ -1,36 +1,42 @@
+import java.util.List;
 
 public class Cafeteria {
 	private String nombre;
-	private long ubicacion;
+	private long ubicacion[];
 	private int afluencia;
-	private Menu menu;
+	private List<Menu> menu;
 	
-	public Cafeteria(String nom, long ubi) {
+	public Cafeteria(String nom, long ubicacion[]) {
 		nombre=nom;
-		ubicacion=ubi;
+		this.ubicacion = ubicacion.clone();
 	}
-	public void addMenu(Menu m) {
-		menu=m;
+	public void addMenu(Menu menu) {
+		this.menu = menu;
 	}
-	public Menu getMenu() {
+	public void addMenus(List<Menu> menus) {
+		for(Menu m : menus) {
+			this.addMenu(m);
+		}
+	}
+	public List<Menu> getMenu() {
 		return menu;
 	}
 	public String getNombre() {
 		return nombre;
 	}
-	public setNombre(String nom) {
-		nobmre=nom;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
-	public long getUbicacion() {
-		return ubicacion
+	public long[] getUbicacion() {
+		return ubicacion;
 	}
-	public void setUbicacion(long ubi) {
-		ubicacion=ubi;
+	public void setUbicacion(long ubicacion[]) {
+		this.ubicacion = ubicacion;
 	}
 	public int getAfluencia() {
 		return afluencia;
 	}
-	public void setAfluencia(int af) {
-		afluencia=af;
-	}
+	public void setAfluencia(int afluencia) {
+		this.afluencia = afluencia;
+	} 
 }

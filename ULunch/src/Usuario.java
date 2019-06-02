@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Usuario {
 	
 	private String nombre;
@@ -5,11 +7,15 @@ public class Usuario {
 	private String email;
 	private boolean moderator;
 	private boolean admin;
+	private List<Alergias> alergias;
 	
-	public Usuario (String nombre,String password, String email) {
+	public Usuario (String nombre,String password, String email, List<Alergias> alergias) {
 		this.nombre=nombre;
 		this.password=password;
 		this.email=email;
+		this.alergias = alergias;
+		moderator = false;
+		admin = false;
 	}
 	
 	public boolean login (String email, String password) {		
@@ -50,6 +56,14 @@ public class Usuario {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public List<Alergias> getAlergias() {
+		return alergias;
+	}
+	
+	public void setAlergias(List<Alergias> alergias) {
+		this.alergias = alergias;
 	}
 	
 	

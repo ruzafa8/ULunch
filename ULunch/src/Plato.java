@@ -9,15 +9,6 @@ public class Plato {
 	private List<Alergias> alergias;
 	private List<Valoracion> valoracion;
 	
-	public static enum Alergias{
-		GLUTEN, HUEVOS, LACTEOS, PESCADO, MOLUSCOS, CRUSTACEOS, CACAHUETES,
-		SOJA, CASCARAS, SESAMO, APIO, MOSTAZA, ALTRAMUCES, SULFITOS
-	}
-	
-	public static enum Dieta{
-		DEFAULT, VEGETARIANA, VEGANA, CELIACA, MEDITERRANEA
-	}
-	
 	public Plato(String nombre, String imagen, Dieta dieta, List<Alergias> alergias) {
 		this.nombre = nombre;
 		this.imagen = imagen;
@@ -41,5 +32,21 @@ public class Plato {
 	
 	public List<Valoracion> getValoraciones() {
 		return valoracion;
+	}
+	
+	public Dieta getDieta() {
+		return dieta;
+	}
+	
+	public List<Alergias> getAlergias(){
+		return alergias;
+	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+	
+	public String getImagen() {
+		return imagen;
 	}
 }
