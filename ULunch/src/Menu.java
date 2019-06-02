@@ -1,4 +1,4 @@
-package Ulunch;
+package uLunch;
 
 import java.util.*;
 
@@ -6,7 +6,7 @@ public class Menu {
 	private double precio;
 	private String dia;
 	private List<Plato> primerPlato, segundoPlato, postre;
-	
+
 	public Menu(double precio, String dia) {
 		this.precio=precio;
 		this.dia=dia;
@@ -30,8 +30,8 @@ public class Menu {
 			addPlato(plato);
 		}
 	}
-	public List getPlatos() {
-		listaPlatos= new ArrayList<Plato>();
+	public List<Plato> getPlatos() {
+		List<Plato>listaPlatos= new ArrayList<>();
 		for(Plato plato1:this.primerPlato) {
 			listaPlatos.add(plato1);
 		}
@@ -44,8 +44,8 @@ public class Menu {
 
 		return listaPlatos;
 	}
-	public List getPlatos(Filter filter) {
-		listaPlatos= new ArrayList<Plato>();
+	public List<Plato> getPlatos(Filter filter) {
+		List<Plato>listaPlatos= new ArrayList<>();
 		for(Plato plato1:this.primerPlato) {
 			if(filter.filtra(plato1)) {
 				listaPlatos.add(plato1);
@@ -73,24 +73,30 @@ public class Menu {
 	public String getDia() {
 		return this.dia;
 	}
-	public String setDia(String dia) {
+	public void setDia(String dia) {
 		this.dia=dia;
 	}
 	public double getValoracion() {
 		int i=0;
 		double res=0;
-		for(Plato plato1:this.primerPlato) {
-			i++;
-			res+=plato1.getValoración();
+		for(Plato plato:this.primerPlato) {
+			for(Valoracion valoracion : plato.getValoraciones()) {
+				i++;
+				res += valoracion.getPuntuacion();
+			}
 		}
-		for(Plato plato2:this.segundoPlato) {
-			i++;
-			res+=plato2.getValoración();
+		for(Plato plato:this.segundoPlato) {
+			for(Valoracion valoracion : plato.getValoraciones()) {
+				i++;
+				res += valoracion.getPuntuacion();
+			}
 		}
-		for(Plato plato3:this.postre) {
-			i++;
-			res+=plato3.getValoración();
+		for(Plato plato:this.postre) {
+			for(Valoracion valoracion : plato.getValoraciones()) {
+				i++;
+				res += valoracion.getPuntuacion();
+			}
 		}
-		return res/i;
-	}	
+		return i==0?null:res/i;
+	}
 }
