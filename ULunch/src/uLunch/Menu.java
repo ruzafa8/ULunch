@@ -16,6 +16,10 @@ public class Menu {
 		segundoPlato=new ArrayList<Plato>();
 		postre=new ArrayList<Plato>();
 	}
+	public Menu(double precio, String dia, Plato[] platos) throws IllegalArgumentException {
+		this(precio, dia);
+		addPlato(platos);
+	}
 	public void addPlato(Plato plato) {
 		if(plato instanceof PrimerPlato) {
 			primerPlato.add(plato);

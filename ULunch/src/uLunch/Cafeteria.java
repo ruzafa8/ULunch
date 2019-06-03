@@ -12,6 +12,10 @@ public class Cafeteria {
 		nombre=nom;
 		this.ubicacion = ubicacion.clone();
 	}
+	public Cafeteria(String nom, long ubicacion[],List<Menu> menus) {
+		this(nom, ubicacion);
+		addMenus(menus);
+	}
 	public void addMenu(Menu menu) {
 		this.menu.add(menu);
 	}
