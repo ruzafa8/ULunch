@@ -18,7 +18,15 @@ public class Menu {
 	}
 	public Menu(double precio, String dia, Plato[] platos) throws IllegalArgumentException {
 		this(precio, dia);
+		if(platos[0]==null)throw new IllegalArgumentException("La lista de platos no puede estar vacía");
 		addPlato(platos);
+		if(primerPlato.isEmpty() || segundoPlato.isEmpty() || postre.isEmpty()) {
+			primerPlato.clear();
+			segundoPlato.clear();
+			postre.clear();
+			throw new IllegalArgumentException("Se debe especificar como minimo un primer plato, un segundo y un postre");
+		}
+				
 	}
 	public void addPlato(Plato plato) {
 		if(plato instanceof PrimerPlato) {

@@ -83,11 +83,13 @@ public class Menu_Test {
 	
 	@Test
 	public void test2() {
+		int catches = 0;
 		try {
 			@SuppressWarnings("unused")
 			Menu m2 = new Menu(-4.25, "04/07/2019");
 		}catch(IllegalArgumentException e) {
 			assertEquals(e.getMessage(),"El precio no puede ser negativo");
+			catches++;
 		}
 		
 		try {
@@ -95,7 +97,28 @@ public class Menu_Test {
 			Menu m2 = new Menu(4.25, null);
 		}catch(IllegalArgumentException e) {
 			assertEquals(e.getMessage(),"Es necesario especificar el dia");
+			catches++;
 		}
+		
+		try {
+			Plato plt[] = new Plato[10];
+			@SuppressWarnings("unused")
+			Menu m2 = new Menu(4.25, "04/07/2019",plt);
+		}catch(IllegalArgumentException e) {
+			assertEquals(e.getMessage(),"La lista de platos no puede estar vacía");
+			catches++;
+		}
+		
+		try {
+			Plato plt[] = {new PrimerPlato("Ensala de Pasta", "NONE", Dieta.VEGETARIANA, null),
+					new Postre("Natillas", "NONE", Dieta.DEFAULT, null)};
+			@SuppressWarnings("unused")
+			Menu m2 = new Menu(4.25, "04/07/2019",plt);
+		}catch(IllegalArgumentException e) {
+			assertEquals(e.getMessage(),"Se debe especificar como minimo un primer plato, un segundo y un postre");
+			catches++;
+		}
+		assertEquals(catches,4);
 		
 	}
 		

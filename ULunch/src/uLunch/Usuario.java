@@ -13,11 +13,13 @@ public class Usuario {
 	
 	public Usuario (String nombre,String password, String email, List<Alergias> alergias) throws IllegalArgumentException{
 		if(password.length()<6)throw new IllegalArgumentException("Contraseña demasiado debil");
+		if(email == null)throw new IllegalArgumentException("Se debe especificar un correo");
+		if(nombre == null)throw new IllegalArgumentException("Se debe especificar un nombre");
 		this.nombre=nombre;
 		this.password=password;
 		this.email=email;
 		this.alergias = new LinkedList<>();
-		this.alergias.addAll(alergias);
+		if(alergias!=null)this.alergias.addAll(alergias);
 		moderator = false;
 		admin = false;
 	}
@@ -30,7 +32,8 @@ public class Usuario {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
+	public void setNombre(String nombre) throws IllegalArgumentException{
+		if(nombre == null)throw new IllegalArgumentException("Se debe especificar un nombre");
 		this.nombre = nombre;
 	}
 
@@ -38,7 +41,8 @@ public class Usuario {
 		return email;
 	}
 
-	public void setEmail(String email) {
+	public void setEmail(String email) throws IllegalArgumentException{
+		if(email == null)throw new IllegalArgumentException("Se debe especificar un correo");
 		this.email = email;
 	}
 

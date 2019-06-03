@@ -17,7 +17,7 @@ public class Plato {
 		this.imagen = imagen;
 		this.dieta  = dieta;
 		this.alergias = new LinkedList<>();
-		this.alergias.addAll(alergias);
+		if(alergias!=null)this.alergias.addAll(alergias);
 		this.valoracion = new LinkedList<Valoracion>();
 	}
 	

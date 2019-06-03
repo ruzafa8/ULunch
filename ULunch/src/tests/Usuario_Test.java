@@ -31,12 +31,29 @@ public class Usuario_Test {
 	
 	@Test
 	public void test2() {
+		int catches = 0;
 		try {
 			@SuppressWarnings("unused")
 		 	Usuario u2 = new Usuario("user","1","user@user.user",new LinkedList<>());
 		}catch (IllegalArgumentException e) {
 			assertEquals(e.getMessage(),"Contraseña demasiado debil");
+			catches++;
 		}
+		try {
+			@SuppressWarnings("unused")
+		 	Usuario u2 = new Usuario(null,"buenapass","user@user.user",new LinkedList<>());
+		}catch (IllegalArgumentException e) {
+			assertEquals(e.getMessage(),"Se debe especificar un nombre");
+			catches++;
+		}
+		try {
+			@SuppressWarnings("unused")
+		 	Usuario u2 = new Usuario("nombreOriginal","buenapass",null,new LinkedList<>());
+		}catch (IllegalArgumentException e) {
+			assertEquals(e.getMessage(),"Se debe especificar un correo");
+			catches++;
+		}
+		assertEquals(catches,3);
 	}
 	
 	@AfterEach

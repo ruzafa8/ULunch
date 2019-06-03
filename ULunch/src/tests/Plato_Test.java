@@ -49,28 +49,34 @@ public class Plato_Test {
 	
 	@Test
 	public void test2() {
+		int catches = 0;
 		try {
 			p1.addValoracion(new Usuario("user","112233","user@user.user",new ArrayList<Alergias>()),8, null);
 		}catch (IllegalArgumentException e) {
 			assertEquals(e.getMessage(),"La puntuacion debe ser un entero entre 0 y 5");
+			catches++;
 		}
 		try {
 			p1.addValoracion(new Usuario("user","112233","user@user.user",new ArrayList<Alergias>()),-6, null);
 		}catch (IllegalArgumentException e) {
 			assertEquals(e.getMessage(),"La puntuacion debe ser un entero entre 0 y 5");
+			catches++;
 		}
 		try {
 			@SuppressWarnings("unused")
 			Plato p5 = new Plato(null,"hola",Dieta.DEFAULT,null);
 		}catch (IllegalArgumentException e) {
 			assertEquals(e.getMessage(),"Es necesario especificar el nombre");
+			catches++;
 		}
 		try {
 			@SuppressWarnings("unused")
 			Plato p5 = new Plato("esto","hola",null,null);
 		}catch (IllegalArgumentException e) {
 			assertEquals(e.getMessage(),"Es necesario especificar la dieta");
+			catches++;
 		}
+		assertEquals(4,catches);
 	}
 	
 	@AfterEach

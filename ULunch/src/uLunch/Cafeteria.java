@@ -8,7 +8,7 @@ public class Cafeteria {
 	private int afluencia;
 	private List<Menu> menu;
 	
-	public Cafeteria(String nom, long ubicacion[]) {
+	private Cafeteria(String nom, long ubicacion[]) {
 		nombre=nom;
 		this.ubicacion = ubicacion.clone();
 	}
